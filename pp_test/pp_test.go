@@ -32,3 +32,24 @@ func TestPrettyPrintStructs(t *testing.T) {
 	})
 	t.Log(s)
 }
+
+func TestPrettyPrintStructsWithErrorChecking(t *testing.T) {
+	var (
+		s string
+		e error
+	)
+
+	s, e = pp.PrintSafe(nil)
+	if e != nil {
+		t.Log(e)
+	} else {
+		t.Log(s)
+	}
+
+	s, e = pp.PrintSafe(struct{ F string }{"some field"})
+	if e != nil {
+		t.Log(e)
+	} else {
+		t.Log(s)
+	}
+}
